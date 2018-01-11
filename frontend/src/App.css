@@ -26,10 +26,53 @@
 
 .App-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .App-add-record,
 .App-last-record {
   padding: 20px;
-  width: 50%;
+}
+
+.App-add-record {
+  box-sizing: border-box;
+  max-width: 990px;
+  min-width: 65%;
+  padding: 20px;
+}
+
+.App-last-record {
+  min-width: 430px;
+}
+
+.App-add-record h2 {
+  text-align: left;
+  margin: 5px 0 0 4%;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: Roboto, sans-serif;
+}
+
+.App-add-record fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 0;
+  margin-bottom: 10px;
+}
+
+.App-add-record .text-field,
+.App-add-record .toggle {
+  display: inline-block;
+  min-width: 30%;
+}
+
+.App-add-record .controls {
+  margin-top: 20px;
+}
+
+.App-add-record .controls>div:first-of-type {
+  margin-right: 20px;
 }

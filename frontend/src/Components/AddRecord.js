@@ -1,24 +1,36 @@
 import React from 'react';
+import MaterialToggle from './Inputs/MaterialToggle';
+import MaterialTextField from './Inputs/MaterialTextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import { observer } from 'mobx-react';
 
 export default observer(({ form }) => (
-  <form>
-    <label htmlFor={form.$('email').id}>
-      {form.$('email').label}
-    </label>
-    <input {...form.$('email').bind()} />
-    <p>{form.$('email').error}</p>
+  <div className="App-add-record">
+    <h2>Add a new record</h2>
+    <form>
+      <fieldset>
+        {form.setup().fields.map((field) => {
+          if (!field.type) {
+            return (<MaterialTextField key={form.$(field.name).id} field={form.$(field.name)} />);
+          }
 
-    <label htmlFor={form.$('password').id}>
-      {form.$('password').label}
-    </label>
-    <input {...form.$('password').bind({ type: 'password' })} />
-    <p>{form.$('password').error}</p>
+          return null;
+        })}
+      </fieldset>
+      <fieldset>
+        {form.setup().fields.map((field) => {
+          if (field.type === 'checkbox') {
+            return (<MaterialToggle key={form.$(field.name).id} field={form.$(field.name)} />);
+          }
 
-    <button type="submit" onClick={form.onSubmit}>Submit</button>
-    <button type="button" onClick={form.onReset}>Reset</button>
-    <button type="button" onClick={form.onClear}>Clear</button>
-
-    <p>{form.error}</p>
-  </form>
+          return null;
+        })}
+      </fieldset>
+      <p>{form.error}</p>
+      <div className="controls">
+        <RaisedButton label="Submit" onClick={form.onSubmit} primary={true} />
+        <RaisedButton label="Reset" onClick={form.onReset} secondary={true} />
+      </div>
+    </form>
+  </div>
 ));
