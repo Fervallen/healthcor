@@ -1,0 +1,52 @@
+.notification {
+  -moz-animation: cssAnimation 0s ease-in 4s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 4s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 4s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 4s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  background-color: cadetblue;
+  border: 1px #222 solid;
+  border-radius: 5px;
+  font-size: 1.2em;
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  width: 80%;
+  margin-left: 10%;
+  z-index: 100;
+  padding: 1em;
+}
+
+.success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+@keyframes cssAnimation {
+  to {
+    width:0;
+    height:0;
+    padding: 0;
+    overflow:hidden;
+  }
+}
+@-webkit-keyframes cssAnimation {
+  to {
+    width:0;
+    height:0;
+    padding: 0;
+    visibility:hidden;
+  }
+}

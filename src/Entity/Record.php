@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecordRepository")
@@ -123,13 +122,13 @@ class Record extends AbstractEntity
     protected $productivityLevel;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $bloodPressureHigh;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $bloodPressureLow;
@@ -153,7 +152,7 @@ class Record extends AbstractEntity
     protected $sleepQuality;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      * @var float
      */
     protected $weight;
@@ -174,7 +173,7 @@ class Record extends AbstractEntity
      * @ORM\Column(type="boolean")
      * @var bool
      */
-    protected $type;
+    protected $morning;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Feeding")
@@ -198,16 +197,16 @@ class Record extends AbstractEntity
 
     /**
      * Record constructor
-     * @param Request $request
+     * @param array $attributes
      */
-    public function __construct(Request $request)
+    public function __construct(array $attributes)
     {
         $this->date = new \DateTime('now', new \DateTimeZone('Europe/Kiev'));
-        $this->type = ($this->date->format('H') < self::MORNING_END_HOUR);
+        $this->morning = ($this->date->format('H') < self::MORNING_END_HOUR);
         $this->feeding = new ArrayCollection();
         $this->alcohol = new ArrayCollection();
 
-        return parent::__construct($request);
+        return parent::__construct($attributes);
     }
 
     /**

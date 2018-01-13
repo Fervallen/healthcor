@@ -40,8 +40,8 @@ class AbstractRepository extends ServiceEntityRepository
      */
     public function count()
     {
-        return $this->createQueryBuilder('r')
-            ->select('COUNT(r)')
+        return $this->createQueryBuilder('entity')
+            ->select('COUNT(entity)')
             ->getQuery()
             ->getSingleScalarResult();
     }

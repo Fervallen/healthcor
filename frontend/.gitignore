@@ -9,7 +9,8 @@
 # production
 /build
 
-/src/env.js
+# environment file
+/src/Environment/options.js
 
 # misc
 .DS_Store

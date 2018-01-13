@@ -2,31 +2,29 @@
 
 namespace App\Entity;
 
-use Symfony\Component\HttpFoundation\Request;
-
 class AbstractEntity
 {
 	/**
-	 * @param Request $request
+	 * @param array $attributes
 	 * @return $this
 	 */
-	public function __construct(Request $request)
+	public function __construct(array $attributes)
 	{
-		return $this->setAttributesFromRequest($request);
+		return $this->setAttributesFromRequest($attributes);
 	}
 
     /**
-     * @param Request $request
+     * @param array $attributes
      * @return $this
      */
-    public function setAttributesFromRequest(Request $request)
+    public function setAttributesFromRequest(array $attributes)
     {
         foreach (get_object_vars($this) as $field => $value) {
         	if ($field == 'id') {
         		continue;
 	        }
-            if (!empty($newValue = $request->get($field))) {
-                $this->$field = $newValue;
+            if (isset($attributes[$field])) {
+                $this->$field = $attributes[$field];
             }
         }
 

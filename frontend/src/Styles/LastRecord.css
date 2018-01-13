@@ -1,0 +1,18 @@
+.last-record {
+  width: 430px;
+  padding: 20px;
+}
+
+.last-record .record-column {
+  width: 50%;
+  display: inline-table;
+  text-align: left;
+}
+
+.last-record .record-column tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.last-record .record-column td {
+  padding: 3px;
+}

@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 
 export default observer(({
   field,
-  type = 'number',
+  type = 'text',
   placeholder = null,
   validatingText = 'validating...',
 }) => (
@@ -12,5 +12,8 @@ export default observer(({
     <TextField
       {...field.bind({ type, placeholder, validatingText })}
     /><br />
+    <small className="error">
+      {field.error}
+    </small>
   </div>
 ));

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\AbstractEntity;
-use App\Entity\Record;
 use App\Repository\AbstractRepository;
 use Doctrine\Common\Persistence\ObjectRepository;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -11,6 +10,7 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AbstractController extends FOSRestController implements ClassResourceInterface
 {
@@ -20,27 +20,14 @@ class AbstractController extends FOSRestController implements ClassResourceInter
     protected static $entityClass;
 
     /**
-     * @return AbstractEntity|View
-     */
-    public function newAction()
-    {
-        $entity = $this->getRepository()->findLast();
-        if (!$entity) {
-            return new View('No records exist');
-        }
-
-        return $entity;
-    }
-
-    /**
      * @param int $id
-     * @return AbstractEntity|View|object
+     * @return AbstractEntity|JsonResponse|object
      */
     public function getAction($id)
     {
         $entity = $this->getRepository()->find($id);
         if (!$entity) {
-            return new View('Record not found', Response::HTTP_NOT_FOUND);
+            return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
 
         return $entity;
@@ -56,20 +43,20 @@ class AbstractController extends FOSRestController implements ClassResourceInter
 
     /**
      * @param Request $request
-     * @return View
+     * @return AbstractEntity
      */
     public function postAction(Request $request)
     {
-        $entity = new static::$entityClass($request);
+        $entity = new static::$entityClass(json_decode($request->getContent(), true));
 	    $this->saveEntity($entity);
 
-        return new View('Entity added', Response::HTTP_CREATED);
+        return $entity;
     }
 
     /**
      * @param int $id
      * @param Request $request
-     * @return View
+     * @return AbstractEntity
      */
     public function patchAction($id, Request $request)
     {
@@ -77,15 +64,15 @@ class AbstractController extends FOSRestController implements ClassResourceInter
         if ($entity instanceof View) {
             return $entity;
         }
-        $entity->setAttributesFromRequest($request);
+        $entity->setAttributes(json_decode($request->getContent(), true));
 	    $this->saveEntity($entity);
 
-        return new View('Entity updated');
+        return $entity;
     }
 
     /**
      * @param int $id
-     * @return View
+     * @return JsonResponse
      */
     public function deleteAction($id)
     {
@@ -96,7 +83,7 @@ class AbstractController extends FOSRestController implements ClassResourceInter
         $this->getDoctrine()->getManager()->remove($entity);
 	    $this->getDoctrine()->getManager()->flush();
 
-        return new View('Entity removed');
+        return new JsonResponse();
     }
 
     /**

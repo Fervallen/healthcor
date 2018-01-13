@@ -6,6 +6,10 @@ record-count:
     path: /api/record/count
     controller: App\Controller\RecordController::count
 
+record-last:
+    path: /api/record/last
+    controller: App\Controller\RecordController::last
+
 record:
     type:     rest
     resource: App\Controller\RecordController
@@ -19,9 +23,4 @@ alcohol:
 feeding:
     type:     rest
     resource: App\Controller\FeedingController
-    prefix:   /api
-
-person:
-    type:     rest
-    resource: App\Controller\PersonController
     prefix:   /api
