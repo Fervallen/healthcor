@@ -6,7 +6,7 @@ fos_rest:
     routing_loader: true
     format_listener:
         rules:
-            - { path: ^/api, prefer_extension: false, fallback_format: json, priorities: [json] }
+            - { path: ^/healthcor/api, prefer_extension: false, fallback_format: json, priorities: [json] }
     view:
         view_response_listener: 'force'
         formats:
