@@ -3,6 +3,12 @@
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
+/public/static/
+/public/favicon.ico
+/public/index.html
+/public/service-worker.js
+/public/manifest.json
+/public/asset-manifest.json
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

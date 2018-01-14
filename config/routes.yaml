@@ -3,14 +3,12 @@ index:
     defaults: { _controller: 'App\Controller\DefaultController::index' }
 
 record-count:
-    path: /record/count
+    path: /healthcor/api/record/count
     controller: App\Controller\RecordController::count
-    prefix:   /healthcor/api
 
 record-last:
-    path: /record/last
+    path: /healthcor/api/record/last
     controller: App\Controller\RecordController::last
-    prefix:   /healthcor/api
 
 record:
     type:     rest
