@@ -15,6 +15,7 @@
     "validatorjs": "^3.13.6",
     "whatwg-fetch": "^2.0.3"
   },
+  "homepage": "/healthcor",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && cp -r build/* ../public/",
