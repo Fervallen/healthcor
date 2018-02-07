@@ -59,19 +59,13 @@ class Record extends AbstractEntity
      * @ORM\Column(type="boolean")
      * @var bool
      */
+    protected $mastrubated;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
     protected $walked;
-
-    /**
-     * @ORM\Column(type="boolean")
-     * @var bool
-     */
-    protected $beenToTomSour;
-
-    /**
-     * @ORM\Column(type="boolean")
-     * @var bool
-     */
-    protected $hadDinnerAtRestaurant;
 
     /**
      * @ORM\Column(type="boolean")
@@ -89,34 +83,130 @@ class Record extends AbstractEntity
      * @ORM\Column(type="boolean")
      * @var bool
      */
+    protected $wokeUpOnTime;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $wentToBedOnTime;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $difficultWakeUp;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $difficultFallingAsleep;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
     protected $tookVitamins;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $hadAGoodBreakfast;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $eatLate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $tookCaffeine;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $drankSparklingLiquids;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $hadAtLeastOneSuccess;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $hadNiceExtraordinaryEvent;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $playedGames;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $didSomeLearning;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $pessimisticMindset;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
+     */
+    protected $dayDifficulty;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
+     */
+    protected $daySuccess;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
+     */
+    protected $foodFitnessLevel;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $stressLevel;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $fatigueLevel;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $inspirationLevel;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $willPowerLevel;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $productivityLevel;
@@ -134,19 +224,19 @@ class Record extends AbstractEntity
     protected $bloodPressureLow;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $pulse;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @var int
      */
     protected $steps;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      * @var int
      */
     protected $sleepQuality;
@@ -158,7 +248,7 @@ class Record extends AbstractEntity
     protected $weight;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      * @var float
      */
     protected $sleepDuration;
