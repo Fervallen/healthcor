@@ -14,13 +14,3 @@ record:
     type:     rest
     resource: App\Controller\RecordController
     prefix:   /healthcor/api
-
-alcohol:
-    type:     rest
-    resource: App\Controller\AlcoholController
-    prefix:   /healthcor/api
-
-feeding:
-    type:     rest
-    resource: App\Controller\FeedingController
-    prefix:   /healthcor/api

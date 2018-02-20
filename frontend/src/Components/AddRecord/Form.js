@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AddRecordFormControls from './Controls';
+import DatePickerWidget from '../Inputs/DatePicker';
 import MaterialToggle from '../Inputs/MaterialToggle';
 import MaterialTextField from '../Inputs/MaterialTextField';
 
@@ -7,6 +8,7 @@ export default class AddRecordForm extends Component {
   render() {
     return (
       <form>
+        <fieldset>{ this._getDatePicker() }</fieldset>
         <fieldset>{ this._getTextFields() }</fieldset>
         <fieldset>{ this._getToggleFields() }</fieldset>
         <p>{this.props.form.error}</p>
@@ -16,6 +18,25 @@ export default class AddRecordForm extends Component {
         />
       </form>
     );
+  }
+
+  /**
+   * @return {Array}
+   * @private
+   */
+  _getDatePicker() {
+    return this.props.form.setup().fields.map((field) => {
+      if (field.type === 'date-picker') {
+        return (
+          <DatePickerWidget
+            key={this.props.form.$(field.name).id}
+            field={this.props.form.$(field.name)}
+          />
+        );
+      }
+
+      return null;
+    })
   }
 
   /**

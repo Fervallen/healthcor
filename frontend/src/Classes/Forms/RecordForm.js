@@ -26,6 +26,11 @@ export default class RecordForm extends Form {
     return {
       fields: [
         {
+          type: 'date-picker',
+          placeholder: 'Today',
+          name: 'date',
+        },
+        {
           placeholder: 'Day tasks difficulty (1 - 10)',
           name: 'dayDifficulty',
           label: 'Day difficulty',
@@ -129,6 +134,18 @@ export default class RecordForm extends Form {
         },
         {
           type: 'checkbox',
+          name: 'drunkBeer',
+          label: 'Drunk beer',
+          rules: 'boolean',
+        },
+        {
+          type: 'checkbox',
+          name: 'drunkSpirits',
+          label: 'Drunk spirits',
+          rules: 'boolean',
+        },
+        {
+          type: 'checkbox',
           name: 'exercised',
           label: 'Did exercises today',
           rules: 'boolean',
@@ -183,6 +200,18 @@ export default class RecordForm extends Form {
         },
         {
           type: 'checkbox',
+          name: 'tookWellman',
+          label: 'Took Wellman',
+          rules: 'boolean',
+        },
+        {
+          type: 'checkbox',
+          name: 'tookEnergyVitrum',
+          label: 'Took Energy Vitrum',
+          rules: 'boolean',
+        },
+        {
+          type: 'checkbox',
           name: 'wokeUpOnTime',
           label: 'Woke up on time',
           rules: 'boolean',
@@ -201,8 +230,8 @@ export default class RecordForm extends Form {
         },
         {
           type: 'checkbox',
-          name: 'difficultFallingAsleep',
-          label: 'Difficult falling asleep',
+          name: 'difficultFallingAsleepYesterday',
+          label: 'Hard to fall asleep yesterday',
           rules: 'boolean',
         },
         {
@@ -257,6 +286,18 @@ export default class RecordForm extends Form {
           type: 'checkbox',
           name: 'pessimisticMindset',
           label: 'Was pessimistic',
+          rules: 'boolean',
+        },
+        {
+          type: 'checkbox',
+          name: 'feltIll',
+          label: 'Felt somewhat ill',
+          rules: 'boolean',
+        },
+        {
+          type: 'checkbox',
+          name: 'wasIll',
+          label: 'Was really ill',
           rules: 'boolean',
         },
       ],

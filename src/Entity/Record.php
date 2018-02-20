@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Record extends AbstractEntity
 {
-    const MORNING_END_HOUR = 14;
+    const NEW_DAY_STARTS_AT = 5;
 
     /**
      * @ORM\Id
@@ -30,6 +30,18 @@ class Record extends AbstractEntity
      * @var bool
      */
     protected $drunk;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $drunkBeer;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $drunkSpirits;
 
     /**
      * @ORM\Column(type="boolean")
@@ -101,13 +113,25 @@ class Record extends AbstractEntity
      * @ORM\Column(type="boolean")
      * @var bool
      */
-    protected $difficultFallingAsleep;
+    protected $difficultFallingAsleepYesterday;
 
     /**
      * @ORM\Column(type="boolean")
      * @var bool
      */
     protected $tookVitamins;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $tookWellman;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $tookEnergyVitrum;
 
     /**
      * @ORM\Column(type="boolean")
@@ -162,6 +186,18 @@ class Record extends AbstractEntity
      * @var bool
      */
     protected $pessimisticMindset;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $feltIll;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @var bool
+     */
+    protected $wasIll;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -260,30 +296,10 @@ class Record extends AbstractEntity
     protected $date;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @var bool
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
      */
-    protected $morning;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Feeding")
-     * @ORM\JoinTable(name="record_feeding_xref",
-     *   joinColumns={@ORM\JoinColumn(name="record_id", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="feeding_id", referencedColumnName="id")}
-     * )
-     * @var ArrayCollection|Feeding[]
-     */
-    protected $feeding;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Alcohol")
-     * @ORM\JoinTable(name="record_alcohol_xref",
-     *   joinColumns={@ORM\JoinColumn(name="record_id", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="alcohol_id", referencedColumnName="id")}
-     * )
-     * @var ArrayCollection|Alcohol[]
-     */
-    protected $alcohol;
+    protected $dateTime;
 
     /**
      * Record constructor
@@ -291,37 +307,43 @@ class Record extends AbstractEntity
      */
     public function __construct(array $attributes)
     {
-        $this->date = new \DateTime('now', new \DateTimeZone('Europe/Kiev'));
-        $this->morning = ($this->date->format('H') < self::MORNING_END_HOUR);
-        $this->feeding = new ArrayCollection();
-        $this->alcohol = new ArrayCollection();
+        $date = null;
+        if (!empty($attributes['date'])) {
+            if (strlen($attributes['date']) > 10) {
+                $attributes['date'] = substr($attributes['date'], 0, 10);
+            }
+            $date = $this->getDate($attributes['date']);
+            unset($attributes['date']);
+        }
+        $this->setDateAndTime($date);
 
         return parent::__construct($attributes);
     }
 
     /**
-     * @param Feeding $feeding
-     * @return $this
+     * @param \DateTime|null $date
      */
-    public function setFeeding(Feeding $feeding)
+    private function setDateAndTime(\DateTime $date = null)
     {
-        if (!$this->feeding->contains($feeding)) {
-            $this->feeding->add($feeding);
+        if ($date) {
+            $this->dateTime = $date;
+        } else {
+            $this->dateTime = $this->getDate('now');
+            if ($this->dateTime->format('h') < self::NEW_DAY_STARTS_AT) {
+                $this->dateTime->modify('-1 day');
+                $this->dateTime->setTime(0, 0, 0);
+            }
         }
-
-        return $this;
+        $this->date = clone($this->dateTime);
+        $this->date->setTime(0, 0, 0);
     }
 
     /**
-     * @param Alcohol $alcohol
-     * @return $this
+     * @param string $dateString
+     * @return \DateTime
      */
-    public function setAlcohol(Alcohol $alcohol)
+    private function getDate($dateString)
     {
-        if (!$this->alcohol->contains($alcohol)) {
-            $this->alcohol->add($alcohol);
-        }
-
-        return $this;
+        return new \DateTime($dateString, new \DateTimeZone('Europe/Kiev'));
     }
 }

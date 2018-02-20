@@ -45,12 +45,12 @@ class LastRecord extends Component {
       return null;
     }
     let lastRecord = this.state.lastRecord;
-    let lastRecordDate = new Date(lastRecord.date);
+    let lastRecordDate = new Date(lastRecord.date_time);
 
     return (
       <div>
         <p>
-          <b>Added at</b>: {lastRecordDate.toDateString()} at {lastRecordDate.toTimeString().substr(0, 8)} ({ lastRecord.morning ? 'morning' : 'evening' })
+          <b>Added at</b>: {lastRecordDate.toDateString()} at {lastRecordDate.toTimeString().substr(0, 5)}
         </p>
         { LastRecord.getStatsTable(this.getNumericStats()) }
         { LastRecord.getStatsTable(this.getBooleanStats()) }
@@ -80,7 +80,7 @@ class LastRecord extends Component {
   getNumericStats() {
     return Object.keys(this.state.lastRecord).map((field) => {
       if ((typeof(this.state.lastRecord[field]) !== "boolean") &&
-        (['id', 'date', 'morning', 'alcohol', 'feeding'].indexOf(field) === -1)
+        (['id', 'date', 'date_time'].indexOf(field) === -1)
       ) {
         return (
           <tr key={field}>
