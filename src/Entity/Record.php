@@ -329,13 +329,13 @@ class Record extends AbstractEntity
             $this->dateTime = $date;
         } else {
             $this->dateTime = $this->getDate('now');
-            if ($this->dateTime->format('h') < self::NEW_DAY_STARTS_AT) {
+            if ($this->dateTime->format('H') < self::NEW_DAY_STARTS_AT) {
                 $this->dateTime->modify('-1 day');
-                $this->dateTime->setTime(0, 0, 0);
+                $this->dateTime->setTime(23, 0, 0);
             }
         }
         $this->date = clone($this->dateTime);
-        $this->date->setTime(0, 0, 0);
+        $this->date->setTime(23, 0, 0);
     }
 
     /**
