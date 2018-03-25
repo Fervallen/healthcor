@@ -14,3 +14,6 @@ record:
     type:     rest
     resource: App\Controller\RecordController
     prefix:   /healthcor/api
+
+logout:
+    path: /logout

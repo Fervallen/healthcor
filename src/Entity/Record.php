@@ -301,10 +301,6 @@ class Record extends AbstractEntity
      */
     protected $dateTime;
 
-    /**
-     * Record constructor
-     * @param array $attributes
-     */
     public function __construct(array $attributes)
     {
         $date = null;
@@ -320,10 +316,7 @@ class Record extends AbstractEntity
         return parent::__construct($attributes);
     }
 
-    /**
-     * @param \DateTime|null $date
-     */
-    private function setDateAndTime(\DateTime $date = null)
+    private function setDateAndTime(?\DateTime $date)
     {
         if ($date) {
             $this->dateTime = $date;
@@ -338,11 +331,7 @@ class Record extends AbstractEntity
         $this->date->setTime(23, 0, 0);
     }
 
-    /**
-     * @param string $dateString
-     * @return \DateTime
-     */
-    private function getDate($dateString)
+    private function getDate(string $dateString): \DateTime
     {
         return new \DateTime($dateString, new \DateTimeZone('Europe/Kiev'));
     }
